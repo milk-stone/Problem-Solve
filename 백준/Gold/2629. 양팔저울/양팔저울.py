@@ -3,23 +3,18 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-chu = list(map(int, input().split()))
+chu = [0] + list(map(int, input().split()))
 k = int(input())
 things = list(map(int, input().split()))
 dp = set()
-new = []
-for i in range(n):
-    new = []
-    for j in dp:
-        for k in [j - chu[i], j + chu[i], chu[i] - j]:
-            if 1 <= k < 40001 and k not in dp:
-                new.append(k)
-    for j in new:
-        dp.add(j)
-    if chu[i] not in dp:
-        dp.add(chu[i])
-for i in things:
-    if i in dp:
-        print("Y", end=' ')
-    else:
-        print("N", end=' ')
+
+for weight in chu:
+    new = set({weight})
+    for num in dp:
+        new.add(abs(num-weight))
+        new.add(num+weight)
+    dp = dp.union(new)
+
+for gem in things:
+    print("Y" if gem in dp else "N", end = ' ')
+print()
