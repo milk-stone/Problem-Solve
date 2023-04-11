@@ -1,7 +1,3 @@
-import sys
-
-input = sys.stdin.readline
-
 n = int(input())
 chu = [0] + list(map(int, input().split()))
 k = int(input())
