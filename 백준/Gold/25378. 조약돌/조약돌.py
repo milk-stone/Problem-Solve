@@ -5,7 +5,8 @@ input = sys.stdin.readline
 n = int(input())
 stones = list(map(int, input().split()))
 skip = [[False for _ in range(n)] for _ in range(n)]
-dp = [i+1 for i in range(n)]
+dp = [987654321 for _ in range(n)]
+dp[0] = 1
 
 
 for start in range(n-1):
@@ -19,9 +20,10 @@ for start in range(n-1):
 
 for i in range(n-1):
     for j in range(i+1, n):
+        dp[j] = min(dp[j], dp[j-1] + 1)
         if skip[i][j]:
             if i == 0:
                 dp[j] = min(j-i, dp[j])
-            else:
-                dp[j] = min(j-i+dp[i-1], dp[j])
+                continue
+            dp[j] = min(j - i + dp[i-1], dp[j])
 print(dp[-1])
