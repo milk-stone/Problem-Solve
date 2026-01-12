@@ -18,6 +18,7 @@ B = list(map(int, input().split()))
 for i in range(N):
     hashmap[B[i]] = i
 
+
 def update(index):
     i = index + SIZE
     tree[i] = 1
@@ -46,6 +47,6 @@ def search(left, right):
 result = 0
 for i in range(N):
     target = hashmap[A[i]]
-    result += search(target, N)
+    result += search(target, N - 1)
     update(target)
 print(result)
