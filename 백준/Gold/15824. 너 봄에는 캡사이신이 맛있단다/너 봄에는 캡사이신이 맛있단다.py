@@ -6,10 +6,10 @@ N = int(input())
 l = list(map(int, input().split()))
 l.sort()
 ans = 0
-for window_gap in range(1, N):
-    inner = window_gap - 1
-    factor = 2 ** inner
-    for i in range(N - window_gap):
-        ans += ((l[i + window_gap] - l[i]) * factor)
-    ans %= 1_000_000_007
+MOD = 1_000_000_007
+for i in range(N):
+    maxCount = pow(2, i, MOD)
+    minCount = pow(2, N - 1 - i, MOD)
+    ans += (maxCount - minCount) * l[i]
+    ans %= MOD
 print(ans)
