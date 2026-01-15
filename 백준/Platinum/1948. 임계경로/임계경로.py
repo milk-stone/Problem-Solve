@@ -2,7 +2,6 @@ import sys
 from collections import deque
 
 input = sys.stdin.readline
-sys.setrecursionlimit(10 ** 9)
 
 N = int(input())
 M = int(input())
@@ -39,19 +38,17 @@ r_visited = [False for _ in range(N + 1)]
 r_visited[end] = True
 maxRoad = 0
 
-def rdfs(now):
-    global maxRoad
+q = deque([end])
+
+while q:
+    now = q.popleft()
+
     for nextNode, weight in g_i[now]:
         if maxTime[now] - weight == maxTime[nextNode]:
-            if r_visited[nextNode]:
-                maxRoad += 1
-                continue
+            maxRoad += 1
             if not r_visited[nextNode]:
                 r_visited[nextNode] = True
-                maxRoad += 1
-                rdfs(nextNode)
+                q.append(nextNode)
 
-
-rdfs(end)
 
 print(maxRoad)
