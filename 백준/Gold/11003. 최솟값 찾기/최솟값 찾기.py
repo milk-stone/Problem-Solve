@@ -32,8 +32,10 @@ def search(left, right):
         r //= 2
     return ans
 
+answer = []
 for i in range(N):
     if i - (L - 1) < 0:
-        print(search(0, i), end=" ")
+        answer.append(search(0, i))
     else:
-        print(search(i - L + 1, i), end=" ")
+        answer.append(search(i - L + 1, i))
+print(*answer)
