@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -24,6 +25,8 @@ int main(void)
 
     int maxValue = 0;
 
+    unordered_map<string, int> um;
+
     for (int i = 0; i < N; i++)
     {
         string target = v[i];
@@ -31,21 +34,9 @@ int main(void)
         {
             string key = target.substr(j, K);
 
-            int curSum = 0;
+            um[key]++;
 
-            for (int k = 0; k < N; k++)
-            {
-                string now = v[k];
-                for (int l = 0; l < now.length() - K + 1; l++)
-                {
-                    if (key == now.substr(l, K))
-                    {
-                        curSum += 1;
-                    }
-                }
-            }
-
-            maxValue = max(curSum, maxValue);
+            maxValue = max(um[key], maxValue);
         }
     }
     cout << maxValue << "\n";
